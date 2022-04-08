@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import {Post} from '../mocks'
+import {Post} from '@/mocks'
 
 export default defineComponent({
   name: "TimelinePost",

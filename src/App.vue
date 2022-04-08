@@ -3,7 +3,7 @@
     <div class="container">
       <Suspense>
         <template #default>
-          <TimeLine />
+          <ScheduleBuild />
         </template>
         <template #fallback>
           <Spinner />
@@ -16,13 +16,15 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import TimeLine from "./components/TimeLine.vue";
-import Spinner from "./components/Spinner.vue"
+import Spinner from "./components/Spinner.vue";
+import ScheduleBuild from "./components/ScheduleBuild.vue";
 
 export default defineComponent({
   name: "App",
   components: {
     TimeLine,
-    Spinner
+    Spinner,
+    ScheduleBuild
   }
 });
 </script>
