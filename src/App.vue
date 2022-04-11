@@ -3,7 +3,7 @@
     <div class="container">
       <Suspense>
         <template #default>
-          <ScheduleBuild />
+          <AvailabilityList />
         </template>
         <template #fallback>
           <Spinner />
@@ -18,10 +18,12 @@ import { defineComponent } from "vue";
 import TimeLine from "./components/TimeLine.vue";
 import Spinner from "./components/Spinner.vue";
 import ScheduleBuild from "./components/ScheduleBuild.vue";
+import AvailabilityList from "@/components/AvailabilityList.vue";
 
 export default defineComponent({
   name: "App",
   components: {
+    AvailabilityList,
     TimeLine,
     Spinner,
     ScheduleBuild
