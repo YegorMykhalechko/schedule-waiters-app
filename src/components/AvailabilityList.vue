@@ -21,7 +21,6 @@
 
 <script lang="ts">
 import {computed, defineComponent, ref} from "vue";
-import {Post} from "@/mocks";
 
 interface Waiter {
   id: number

@@ -43,9 +43,11 @@ export default defineComponent({
     const periods: Period[] = ["Today", "This Week", "This Month"];
     const currentPeriod = ref<Period>("Today");
     const store = useStore()
+
     if(!store.getState().posts.loaded){
       await store.fetchPosts()
     }
+
     const allPosts: Post[] = store.getState().posts.ids.reduce<Post[]>((acc, id) => {
       const thePost = store.getState().posts.all.get(id)
       if(!thePost) {
@@ -53,6 +55,7 @@ export default defineComponent({
       }
       return acc.concat(thePost)
     }, [])
+
     const posts = computed(() => {
       return allPosts.filter(post => {
         if (currentPeriod.value === "Today") {
