@@ -21,17 +21,24 @@
 
 <script lang="ts">
 import {computed, defineComponent, ref} from "vue";
+import {Post} from "@/mocks";
+
+interface Waiter {
+  id: number
+  name: string
+  detail: boolean
+}
 
 export default defineComponent({
   name: "AvailabilityList",
   setup() {
-    const waiter = ref({
-      id: "2",
+    const waiter = ref<Waiter>({
+      id: Date.now(),
       name: "",
       detail: false
     })
-    const waiters = ref([{
-      id: "1",
+    const waiters = ref<Waiter[]>([{
+      id: 1,
       name: "First Last",
       detail: false
     }]);
