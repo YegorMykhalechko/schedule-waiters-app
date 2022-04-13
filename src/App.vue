@@ -3,7 +3,7 @@
     <div class="container">
       <Suspense>
         <template #default>
-          <TimeLine />
+          <AvailabilityList />
         </template>
         <template #fallback>
           <Spinner />

@@ -12,15 +12,15 @@ function delay() {
 }
 
 // @ts-ignore
-axios.get = async(url: string) => {
-    if(url === '/posts') {
-        await delay()
-        return Promise.resolve({
-            data: [today, thisWeek, thisMonth]
-        });
-
-    }
-}
+// axios.get = async(url: string) => {
+//     if(url === '/posts') {
+//         await delay()
+//         return Promise.resolve({
+//             data: [today, thisWeek, thisMonth]
+//         });
+//
+//     }
+// }
 
 const app = createApp(App)
 app.mount('#app')

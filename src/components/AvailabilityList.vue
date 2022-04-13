@@ -21,6 +21,7 @@
 
 <script lang="ts">
 import {computed, defineComponent, ref} from "vue";
+import axios from "axios";
 
 interface Waiter {
   id: number
@@ -30,18 +31,20 @@ interface Waiter {
 
 export default defineComponent({
   name: "AvailabilityList",
-  setup() {
+  async setup() {
+
+    const res = await axios.get("http://localhost:3000/waiters")
+
     const waiter = ref<Waiter>({
       id: Date.now(),
       name: "",
       detail: false
     })
-    const waiters = ref<Waiter[]>([{
-      id: 1,
-      name: "First Last",
-      detail: false
-    }]);
+
+    const waiters = ref<Waiter[]>(res.data)
+
     const addWaiter = () => {
+      axios.post(`http://localhost:3000/waiters`, waiter.value)
       waiters.value.push(waiter.value)
     }
     const showDetail = (index: any) => {
