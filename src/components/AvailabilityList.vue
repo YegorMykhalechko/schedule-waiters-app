@@ -14,7 +14,7 @@
           <span>Month:</span>
           <strong>{{nextMonth}}</strong>
         </div>
-        <p>List days</p>
+        <Datepicker v-model="day"/>
       </div>
     </li>
   </ul>
@@ -52,19 +52,25 @@ export default defineComponent({
 
     const nextMonth = ref<string>(moment().add(1, 'months').format('MMMM'))
 
+    const day = ref(new Date())
+    console.log(day.value)
+
     const addWaiter = () => {
       axios.post<Waiter>(`http://localhost:3000/waiters`, waiter.value)
       waiters.value.push(waiter.value)
     }
+
     const showDetail = (index: number) => {
       waiters.value[index].detail = !waiters.value[index].detail
     }
+
     return {
       waiter,
       addWaiter,
       waiters,
       showDetail,
-      nextMonth
+      nextMonth,
+      day
     }
   }
 })
