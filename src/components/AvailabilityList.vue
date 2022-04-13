@@ -10,18 +10,22 @@
     <li v-for="(waiter, index) of waiters" :key="index">
       {{waiter.name}}<button @click="showDetail(index)">{{ !waiter.detail ? 'Show more' : 'Show less' }}</button>
       <div v-if="waiter.detail">
-        <p>Current month</p>
+        <div>
+          <span>Month:</span>
+          <strong>{{nextMonth}}</strong>
+        </div>
         <p>List days</p>
-        <p>Time</p>
       </div>
     </li>
   </ul>
-
+  
 </template>
 
 <script lang="ts">
 import {computed, defineComponent, ref} from "vue";
 import axios from "axios";
+import moment from "moment";
+import Datepicker from 'vue3-datepicker'
 
 interface Waiter {
   id: number
@@ -31,9 +35,12 @@ interface Waiter {
 
 export default defineComponent({
   name: "AvailabilityList",
+  components: {
+    Datepicker
+  },
   async setup() {
 
-    const res = await axios.get("http://localhost:3000/waiters")
+    const res = await axios.get<Waiter[]>("http://localhost:3000/waiters")
 
     const waiter = ref<Waiter>({
       id: Date.now(),
@@ -43,18 +50,21 @@ export default defineComponent({
 
     const waiters = ref<Waiter[]>(res.data)
 
+    const nextMonth = ref<string>(moment().add(1, 'months').format('MMMM'))
+
     const addWaiter = () => {
-      axios.post(`http://localhost:3000/waiters`, waiter.value)
+      axios.post<Waiter>(`http://localhost:3000/waiters`, waiter.value)
       waiters.value.push(waiter.value)
     }
-    const showDetail = (index: any) => {
+    const showDetail = (index: number) => {
       waiters.value[index].detail = !waiters.value[index].detail
     }
     return {
       waiter,
       addWaiter,
       waiters,
-      showDetail
+      showDetail,
+      nextMonth
     }
   }
 })
