@@ -47,7 +47,7 @@ import moment from "moment";
 import Datepicker from "vue3-datepicker";
 
 interface availableDay{
-  day: Date,
+  day: string,
   startTime: string,
   endTime: string
 }
@@ -99,7 +99,7 @@ export default defineComponent({
 
     const addDay = (waiter: Waiter) => {
       const availableDay = {
-        day: day.value,
+        day: moment(day.value).format('DD'),
         startTime: start.value,
         endTime: end.value
       }

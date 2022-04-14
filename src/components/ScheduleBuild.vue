@@ -27,7 +27,7 @@
       <td>
         <select name="waiters">
           <option value="">Select Waiter</option>
-          <option v-for="(waiter, index) of waiters" :key="waiter.id" :value="waiter.id">
+          <option v-for="(waiter, index) of availableWaiters(index+1)" :key="waiter.id" :value="waiter.id">
             {{ waiter.name }}
           </option>
         </select>
@@ -66,6 +66,7 @@ import {computed, defineComponent, ref} from "vue";
 import {months} from "@/month";
 import moment from "moment";
 import axios from "axios";
+import any = jasmine.any;
 
 export default defineComponent({
   name: "ScheduleBuild",
@@ -82,11 +83,20 @@ export default defineComponent({
       return days
     })
 
+    const availableWaiters = (day: any) => {
+      return waiters.value.filter((el: any) => {
+        return el.availableDays.find((el: any) => {
+          return +el.day === day
+        })
+      })
+    }
+
     return {
       months,
       currentMonth,
       dayName,
-      waiters
+      waiters,
+      availableWaiters
     }
   }
 })
