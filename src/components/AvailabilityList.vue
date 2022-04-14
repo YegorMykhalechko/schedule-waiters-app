@@ -8,9 +8,7 @@
 
   <ul>
     <li v-for="(waiter, index) of waiters" :key="index">
-      {{
-        waiter.name
-      }}
+      {{ waiter.name }}
       <button @click="showDetail(index)">
         {{ !waiter.detail ? "Show more" : "Show less" }}
       </button>
@@ -21,7 +19,21 @@
         </div>
         <div>
           <Datepicker v-model="day"/>
-          <button @click="addDay">Add</button>
+          <input type="time" v-model="start"/>
+          <span>to</span>
+          <input type="time" v-model="end"/>
+          <button @click="addDay(waiter)">Add</button>
+        </div>
+        <div>
+          <span>Available Days:</span>
+          <ul>
+            <li v-for="(availableDay, index) of waiter.availableDays" :key="index">
+              {{ availableDay.day }}
+              {{ availableDay.startTime}}
+              to
+              {{ availableDay.endTime}}
+            </li>
+          </ul>
         </div>
       </div>
     </li>
@@ -34,10 +46,17 @@ import axios from "axios";
 import moment from "moment";
 import Datepicker from "vue3-datepicker";
 
+interface availableDay{
+  day: Date,
+  startTime: string,
+  endTime: string
+}
+
 interface Waiter {
   id: number;
   name: string;
   detail: boolean;
+  availableDays: availableDay[]
 }
 
 export default defineComponent({
@@ -58,27 +77,34 @@ export default defineComponent({
             .format("MMMM")
     );
 
-    const day = ref<Date>(new Date());
-    const days = ref<Date[]>([])
+    const day = ref<Date>(new Date())
+    const start = ref<string>('00:00')
+    const end = ref<string>('00:00')
 
     const addWaiter = () => {
       const addedWaiter = {
         id: Date.now(),
         name: waiterName.value,
-        detail: false
+        detail: false,
+        availableDays: []
       }
       axios.post<Waiter>(`http://localhost:3000/waiters`, addedWaiter)
       waiters.value.push(addedWaiter)
       waiterName.value = ''
-    };
+    }
 
     const showDetail = (index: number) => {
       waiters.value[index].detail = !waiters.value[index].detail;
-    };
+    }
 
-    const addDay = () => {
-      days.value.push(day.value)
-      console.log(days.value)
+    const addDay = (waiter: Waiter) => {
+      const availableDay = {
+        day: day.value,
+        startTime: start.value,
+        endTime: end.value
+      }
+      waiter.availableDays.push(availableDay)
+      axios.put<Waiter>(`http://localhost:3000/waiters/${waiter.id}`, waiter)
     }
 
     return {
@@ -88,7 +114,9 @@ export default defineComponent({
       showDetail,
       nextMonth,
       day,
-      addDay
+      addDay,
+      start,
+      end
     };
   }
 });
