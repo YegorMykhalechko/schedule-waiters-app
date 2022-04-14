@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="addWaiter">
-    <input placeholder="Added Waiters" v-model="waiter.name" />
+    <input placeholder="Added Waiters" v-model="waiterName"/>
     <button type="submit">Add</button>
   </form>
 
@@ -8,8 +8,10 @@
 
   <ul>
     <li v-for="(waiter, index) of waiters" :key="index">
-      {{ waiter.name
-      }}<button @click="showDetail(index)">
+      {{
+        waiter.name
+      }}
+      <button @click="showDetail(index)">
         {{ !waiter.detail ? "Show more" : "Show less" }}
       </button>
       <div v-if="waiter.detail">
@@ -18,7 +20,7 @@
           <strong>{{ nextMonth }}</strong>
         </div>
         <div>
-          <Datepicker v-model="day" />
+          <Datepicker v-model="day"/>
           <button @click="addDay">Add</button>
         </div>
       </div>
@@ -27,7 +29,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from "vue";
+import {computed, defineComponent, ref} from "vue";
 import axios from "axios";
 import moment from "moment";
 import Datepicker from "vue3-datepicker";
@@ -46,28 +48,28 @@ export default defineComponent({
   async setup() {
     const res = await axios.get<Waiter[]>("http://localhost:3000/waiters");
 
-    const waiter = ref<Waiter>({
-      id: Date.now(),
-      name: "",
-      detail: false
-    });
+    const waiterName = ref();
 
     const waiters = ref<Waiter[]>(res.data);
 
     const nextMonth = ref<string>(
-      moment()
-        .add(1, "months")
-        .format("MMMM")
+        moment()
+            .add(1, "months")
+            .format("MMMM")
     );
 
     const day = ref<Date>(new Date());
     const days = ref<Date[]>([])
-  
+
     const addWaiter = () => {
-      const addedWaiter = waiter.value
+      const addedWaiter = {
+        id: Date.now(),
+        name: waiterName.value,
+        detail: false
+      }
       axios.post<Waiter>(`http://localhost:3000/waiters`, addedWaiter)
       waiters.value.push(addedWaiter)
-      waiter.value.name = ""
+      waiterName.value = ''
     };
 
     const showDetail = (index: number) => {
@@ -80,7 +82,7 @@ export default defineComponent({
     }
 
     return {
-      waiter,
+      waiterName,
       addWaiter,
       waiters,
       showDetail,
