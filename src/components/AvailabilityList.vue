@@ -18,7 +18,7 @@
           <strong>{{ nextMonth }}</strong>
         </div>
         <div>
-          <Datepicker v-model="day"/>
+          <Datepicker v-model="day" />
           <input type="time" v-model="start"/>
           <span>to</span>
           <input type="time" v-model="end"/>
@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts">
-import {computed, defineComponent, ref} from "vue";
+import {defineComponent, ref} from "vue";
 import axios from "axios";
 import moment from "moment";
 import Datepicker from "vue3-datepicker";
