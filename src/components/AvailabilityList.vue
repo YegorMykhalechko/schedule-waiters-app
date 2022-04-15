@@ -38,13 +38,26 @@
       </div>
     </li>
   </ul>
+
+  <button
+      class="button"
+      @click="signIn"
+  >
+    Sign In
+  </button>
+
+  <teleport to="#modal">
+    <component :is="component" />
+  </teleport>
 </template>
 
 <script lang="ts">
-import {defineComponent, ref} from "vue";
+import {defineComponent, ref, markRaw} from "vue";
 import axios from "axios";
 import moment from "moment";
 import Datepicker from "vue3-datepicker";
+
+import { useModal } from '@/useModal'
 
 interface availableDay{
   day: string,
@@ -66,6 +79,8 @@ export default defineComponent({
   },
   async setup() {
     const res = await axios.get<Waiter[]>("http://localhost:3000/waiters");
+
+    const modal = useModal()
 
     const waiterName = ref();
 
@@ -107,6 +122,11 @@ export default defineComponent({
       axios.put<Waiter>(`http://localhost:3000/waiters/${waiter.id}`, waiter)
     }
 
+    const signIn = () => {
+      modal.component.value = markRaw(Datepicker)
+      modal.showModal()
+    }
+
     return {
       waiterName,
       addWaiter,
@@ -116,7 +136,9 @@ export default defineComponent({
       day,
       addDay,
       start,
-      end
+      end,
+      signIn,
+      component: modal.component
     };
   }
 });
