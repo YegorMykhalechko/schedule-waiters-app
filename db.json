@@ -27,6 +27,29 @@
       "name": "test",
       "detail": false,
       "availableDays": []
+    },
+    {
+      "id": 1649973784543,
+      "name": "justyna",
+      "detail": true,
+      "availableDays": [
+        {
+          "day": "01",
+          "startTime": "10:00",
+          "endTime": "00:00"
+        },
+        {
+          "day": "05",
+          "startTime": "10:00",
+          "endTime": "00:00"
+        }
+      ]
+    },
+    {
+      "id": 1649973796449,
+      "name": "natalia",
+      "detail": false,
+      "availableDays": []
     }
   ]
 }
