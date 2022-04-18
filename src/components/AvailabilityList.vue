@@ -37,7 +37,6 @@ interface availableDay {
 interface Waiter {
   id: number;
   name: string;
-  detail: boolean;
   availableDays: availableDay[];
 }
 

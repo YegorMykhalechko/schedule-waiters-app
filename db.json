@@ -3,13 +3,11 @@
     {
       "id": 1,
       "name": "Nelia Kalabanka",
-      "detail": true,
       "availableDays": []
     },
     {
       "id": 1649944492825,
       "name": "test",
-      "detail": false,
       "availableDays": []
     }
   ]

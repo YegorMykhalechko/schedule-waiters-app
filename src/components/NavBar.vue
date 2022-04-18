@@ -1,23 +1,18 @@
 <template>
   <div class="navbar">
     <div class="navbar-end">
-      <div
-          class="buttons"
-      >
         <router-link
             class="button"
-            to="/posts/new"
+            to="/"
         >
-          New Post
+          Home
         </router-link>
-
-        <button
+        <router-link
             class="button"
-
+            to="/schedule"
         >
-          Sign Out
-        </button>
-      </div>
+          Schedule
+        </router-link>
     </div>
   </div>
 
