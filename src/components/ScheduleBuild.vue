@@ -85,7 +85,7 @@ export default defineComponent({
     const availableWaiters = (day: any) => {
       const arr =  waiters.value.map((el: any) => {
         const availableDay = el.availableDays.find((el: any) => {
-          return +el.day === day
+          return +el.day === day && el.month === currentMonth.value.title
         })
 
         return {

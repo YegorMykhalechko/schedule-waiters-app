@@ -72,6 +72,8 @@ export default defineComponent({
     const addDay = (waiter: Waiter) => {
       const availableDay = {
         day: moment(day.value).format("DD"),
+        month: nextMonth.value,
+        year: moment().format('YYYY'),
         startTime: start.value,
         endTime: end.value
       };
