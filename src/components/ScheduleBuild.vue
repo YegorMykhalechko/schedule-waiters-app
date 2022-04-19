@@ -83,9 +83,9 @@ export default defineComponent({
     })
 
     const availableWaiters = (day: any) => {
-      const arr =  waiters.value.map((el: any) => {
+      return waiters.value.map((el: any) => {
         const availableDay = el.availableDays.find((el: any) => {
-          return +el.day === day && el.month === currentMonth.value.title
+          return +el.day === day && el.month === currentMonth.value.title && el.year === moment().format('YYYY')
         })
 
         return {
@@ -94,9 +94,7 @@ export default defineComponent({
           name: el.name
         };
 
-      }).filter((el: any) => el.availableDay);
-
-      return arr
+      }).filter((el: any) => el.availableDay)
     }
 
     return {
