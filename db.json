@@ -3,7 +3,18 @@
     {
       "id": 1,
       "name": "Nelia Kalabanka",
-      "availableDays": []
+      "availableDays": [
+        {
+          "day": "19",
+          "startTime": "00:00",
+          "endTime": "00:00"
+        },
+        {
+          "day": "20",
+          "startTime": "00:00",
+          "endTime": "00:00"
+        }
+      ]
     },
     {
       "id": 1649944492825,

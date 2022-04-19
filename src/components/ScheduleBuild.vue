@@ -28,7 +28,7 @@
         <select name="waiters">
           <option value="">Select Waiter</option>
           <option v-for="(waiter, index) of availableWaiters(index+1)" :key="waiter.id" :value="waiter.id">
-            {{ waiter.name }}
+            {{ waiter.name }}({{waiter.availableDay.startTime}}-{{waiter.availableDay.endTime}})
           </option>
         </select>
       </td>
@@ -66,7 +66,6 @@ import {computed, defineComponent, ref} from "vue";
 import {months} from "@/month";
 import moment from "moment";
 import axios from "axios";
-import any = jasmine.any;
 
 export default defineComponent({
   name: "ScheduleBuild",
@@ -84,11 +83,20 @@ export default defineComponent({
     })
 
     const availableWaiters = (day: any) => {
-      return waiters.value.filter((el: any) => {
-        return el.availableDays.find((el: any) => {
+      const arr =  waiters.value.map((el: any) => {
+        const availableDay = el.availableDays.find((el: any) => {
           return +el.day === day
         })
-      })
+
+        return {
+          id: el.id,
+          availableDay,
+          name: el.name
+        };
+
+      }).filter((el: any) => el.availableDay);
+
+      return arr
     }
 
     return {
