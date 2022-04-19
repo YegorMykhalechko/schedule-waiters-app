@@ -50,4 +50,11 @@ export default defineComponent({
   color: #2c3e50;
   margin-top: 60px;
 }
+.modal-content{
+  padding-top: 5rem;
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
 </style>

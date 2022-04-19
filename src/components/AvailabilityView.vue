@@ -1,35 +1,35 @@
 <template>
-<div>
-          <span>Month:</span>
-          <strong>{{ nextMonth }}</strong>
-        </div>
-  <div>
-    <Datepicker v-model="day" />
-    <input type="time" v-model="start" />
-    <span>to</span>
-    <input type="time" v-model="end" />
-    <button @click="addDay(waiter)">Add</button>
+  <div class="month-section">
+    <span>Month:</span>
+    <span class="month">{{ nextMonth }}</span>
   </div>
-  <div>
-    <span>Available Days:</span>
-    <ul>
+  <div class="pickers">
+    <Datepicker class="datepicker" v-model="day"/>
+    <input type="time" v-model="start"/>
+    <span>:</span>
+    <input type="time" v-model="end"/>
+    <button class="custom-button" @click="addDay(waiter)">Add</button>
+  </div>
+  <div class="list">
+    <p>Available Days:</p>
+    <ul class="list-days" v-if="waiter.availableDays.length">
       <li v-for="(availableDay, index) of waiter.availableDays" :key="index">
         {{ availableDay.day }}
+        {{ availableDay.month }}
         {{ availableDay.startTime }}
         to
         {{ availableDay.endTime }}
       </li>
     </ul>
+    <p class="list-days" v-else>Suck! I`m free</p>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, markRaw } from "vue";
+import {defineComponent, ref} from "vue";
 import axios from "axios";
 import moment from "moment";
 import Datepicker from "vue3-datepicker";
-
-import { useModal } from "@/useModal";
 
 interface availableDay {
   day: string;
@@ -56,10 +56,6 @@ export default defineComponent({
     Datepicker
   },
   setup(props) {
-    const modal = useModal();
-
-    console.log(props.waiter)
-
     const day = ref<Date>(new Date());
     const start = ref<string>("00:00");
     const end = ref<string>("00:00");
@@ -92,4 +88,29 @@ export default defineComponent({
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+  .month-section {
+    color: white;
+    margin-bottom: 0.5rem;
+  }
+  .month {
+    font-weight: bold;
+  }
+  .pickers{
+    color: white;
+  }
+  input{
+    padding: 0.1rem;
+  }
+  .custom-button{
+    display: block;
+    padding: 0.5rem;
+    width: 100%;
+  }
+  .list{
+    color: white;
+  }
+  .list-days{
+    font-weight: bold;
+  }
+</style>
