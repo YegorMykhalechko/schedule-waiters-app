@@ -6,53 +6,25 @@
   </select>
 
   <p>Day of month:<span>{{ currentMonth.day }}</span></p>
+  <p><button class="button" @click="addColumn">Add Column</button></p>
 
   <table class="main-table">
-    <thead>
-    <tr>
-      <th colspan="3">Maska</th>
-      <th colspan="2">Labo</th>
-    </tr>
-    </thead>
     <tbody>
     <tr>
       <td>Day</td>
-      <td>First</td>
-      <td>Second</td>
-      <td>First</td>
-      <td>Second</td>
+      <td v-for="n in columnNumber"><input /></td>
+    </tr>
+    <tr>
+      <td>Day</td>
+      <td v-for="n in columnNumber"><input /></td>
     </tr>
     <tr v-for="(day, index) of dayName">
       <td>{{ index + 1 }}:{{ day }}</td>
-      <td>
+      <td v-for="n in columnNumber">
         <select name="waiters">
           <option value="">Select Waiter</option>
           <option v-for="(waiter, index) of availableWaiters(index+1)" :key="waiter.id" :value="waiter.id">
             {{ waiter.name }}({{waiter.availableDay.startTime}}-{{waiter.availableDay.endTime}})
-          </option>
-        </select>
-      </td>
-      <td>
-        <select name="waiters">
-          <option value="">Select Waiter</option>
-          <option v-for="(waiter, index) of waiters" :key="waiter.id" :value="waiter.id">
-            {{ waiter.name }}
-          </option>
-        </select>
-      </td>
-      <td>
-        <select name="waiters">
-          <option value="">Select Waiter</option>
-          <option v-for="(waiter, index) of waiters" :key="waiter.id" :value="waiter.id">
-            {{ waiter.name }}
-          </option>
-        </select>
-      </td>
-      <td>
-        <select name="waiters">
-          <option value="">Select Waiter</option>
-          <option v-for="(waiter, index) of waiters" :key="waiter.id" :value="waiter.id">
-            {{ waiter.name }}
           </option>
         </select>
       </td>
@@ -73,6 +45,7 @@ export default defineComponent({
     const res = await axios.get("http://localhost:3000/waiters");
     const currentMonth = ref(months[0])
     const waiters = ref(res.data)
+    const columnNumber = ref(0)
 
     const dayName = computed(() => {
       const days = []
@@ -97,12 +70,18 @@ export default defineComponent({
       }).filter((el: any) => el.availableDay)
     }
 
+    const addColumn = () => {
+      columnNumber.value ++
+    }
+
     return {
       months,
       currentMonth,
       dayName,
       waiters,
-      availableWaiters
+      availableWaiters,
+      columnNumber,
+      addColumn
     }
   }
 })
