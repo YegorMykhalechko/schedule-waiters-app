@@ -3,61 +3,6 @@
     {
       "id": 1,
       "name": "Nelia Kalabanka",
-      "availableDays": [
-        {
-          "day": "19",
-          "month": "May",
-          "year": "2022",
-          "startTime": "00:00",
-          "endTime": "00:00"
-        },
-        {
-          "day": "19",
-          "month": "May",
-          "year": "2022",
-          "startTime": "00:00",
-          "endTime": "00:00"
-        },
-        {
-          "day": "19",
-          "month": "May",
-          "year": "2022",
-          "startTime": "00:00",
-          "endTime": "00:00"
-        },
-        {
-          "day": "19",
-          "month": "May",
-          "year": "2022",
-          "startTime": "00:00",
-          "endTime": "00:00"
-        },
-        {
-          "day": "19",
-          "month": "May",
-          "year": "2022",
-          "startTime": "00:00",
-          "endTime": "00:00"
-        },
-        {
-          "day": "19",
-          "month": "May",
-          "year": "2022",
-          "startTime": "00:00",
-          "endTime": "00:00"
-        },
-        {
-          "day": "19",
-          "month": "May",
-          "year": "2022",
-          "startTime": "00:00",
-          "endTime": "00:00"
-        }
-      ]
-    },
-    {
-      "id": 1649944492825,
-      "name": "test",
       "availableDays": []
     }
   ]

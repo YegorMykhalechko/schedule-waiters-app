@@ -19,6 +19,7 @@
         {{ availableDay.startTime }}
         to
         {{ availableDay.endTime }}
+        <button @click="deleteDay(waiter, index)">Delete</button>
       </li>
     </ul>
     <p class="list-days" v-else>Suck! I`m free</p>
@@ -77,12 +78,19 @@ export default defineComponent({
       axios.put<Waiter>(`http://localhost:3000/waiters/${waiter.id}`, waiter);
     };
 
+    const deleteDay = (waiter: any, index: any) => {
+      waiter.availableDays.splice(index, 1)
+      console.log(waiter)
+      axios.put(`http://localhost:3000/waiters/${waiter.id}`, waiter);
+    }
+
     return {
       day,
       addDay,
       start,
       end,
       nextMonth,
+      deleteDay
     };
   }
 });
