@@ -35,6 +35,7 @@ import {Post} from "@/mocks";
 
 interface availableDay {
   day: string;
+  month: string;
   startTime: string;
   endTime: string;
 }
