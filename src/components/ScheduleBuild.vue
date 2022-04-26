@@ -93,6 +93,6 @@ table, th, td {
 }
 
 .main-table {
-  width: 100%;
+  width: auto;
 }
 </style>

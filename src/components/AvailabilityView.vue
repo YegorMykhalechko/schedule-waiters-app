@@ -31,7 +31,6 @@ import {defineComponent, ref} from "vue";
 import axios from "axios";
 import moment from "moment";
 import Datepicker from "vue3-datepicker";
-import {Post} from "@/mocks";
 
 interface availableDay {
   day: string;
