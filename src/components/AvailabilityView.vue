@@ -31,6 +31,7 @@ import {defineComponent, ref} from "vue";
 import axios from "axios";
 import moment from "moment";
 import Datepicker from "vue3-datepicker";
+import {Post} from "@/mocks";
 
 interface availableDay {
   day: string;
@@ -49,14 +50,14 @@ export default defineComponent({
   name: "AvailabilityView",
   props: {
     waiter: {
-      type: Object,
+      type: Object as () => Waiter,
       required: true
     }
   },
   components: {
     Datepicker
   },
-  setup(props) {
+  setup() {
     const day = ref<Date>(new Date());
     const start = ref<string>("00:00");
     const end = ref<string>("00:00");
